@@ -14,11 +14,11 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
     try {
         await registerUseCase({ name, email, password })
+
+        return reply.status(201).send({ msg: 'Usuário criado com sucesso' })
+
     } catch (error) {
         return reply.status(409).send({ msg: 'Algum erro ocorreu' })
     }
 
-
-
-    return reply.status(201).send({ msg: 'Usuário criado com sucesso' })
 }
