@@ -1,4 +1,4 @@
-import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-repository'
+import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
 import { it, describe, beforeEach, expect } from 'vitest'
 import { GetUserProfileUseCase } from './get-user-profile'
 import { hash } from 'bcryptjs'
@@ -38,7 +38,7 @@ describe('get profile use case', () => {
             password_hash: await hash('123456', 6)
         })
 
-        await expect(() => sut.execute({
+        await expect(async () => await sut.execute({
             userId: 'non-existing-id'
         })
         ).rejects.toBeInstanceOf(ResourceNotFoundError)
