@@ -1,5 +1,5 @@
 import { Prisma, Gym } from "@prisma/client";
-import { GymsRepository } from "../gyms-repository";
+import { findManyNearByParams, GymsRepository } from "../gyms-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaGymsRepository implements GymsRepository {
@@ -18,5 +18,9 @@ export class PrismaGymsRepository implements GymsRepository {
 
         return gym
     }
+
+    // async findManyNearBy(params: findManyNearByParams): Promise<Gym[]> {
+    //     console.log(params)
+    // }
 
 }
