@@ -4,10 +4,10 @@ import { z } from "zod";
 
 export async function nearBy(request: FastifyRequest, reply: FastifyReply) {
     const fetchNearByGymsQuerySchema = z.object({
-        latitude: z.number().refine(value => {
+        latitude: z.coerce.number().refine(value => {
             return Math.abs(value) <= 90
         }),
-        longitude: z.number().refine(value => {
+        longitude: z.coerce.number().refine(value => {
             return Math.abs(value) <= 180
         }),
     })
@@ -16,10 +16,11 @@ export async function nearBy(request: FastifyRequest, reply: FastifyReply) {
 
     const fetchNearByGymsUseCase = makeFetchNearbyGymsUseCase()
 
-    const gyms = await fetchNearByGymsUseCase.execute({
+    const { gyms } = await fetchNearByGymsUseCase.execute({
         userLatitude: latitude,
         userLongitude: longitude
     })
+
 
     return reply.status(200).send({
         gyms,

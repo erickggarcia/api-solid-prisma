@@ -28,8 +28,6 @@ export class PrismaUsersRepository implements UsersRepository {
       data,
     })
 
-    console.log('usuariooooo ', user)
-
     return user
   }
 }
